@@ -1,0 +1,32 @@
+version: '2'
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./Server-Docker/Dockerfile
+    ports:
+      - '80:3000'
+    depends_on:
+      - mysqldb
+    networks: 
+      backend:
+        ipv4_address: 172.20.128.2  
+    command: ["./wait-for-it.sh"]
+
+  mysqldb:
+    container_name: mysqldb
+    build: ./Database/
+    ports:
+      - '3306:3306'
+    networks: 
+      backend:
+        ipv4_address: 172.20.128.3  
+
+networks:
+  backend:
+    driver: "bridge"
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          # #docker-compose v3+ do not use ip_range
+          ip_range: 172.28.5.0/24

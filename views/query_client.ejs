@@ -1,0 +1,74 @@
+<% include ./partials/header %>
+
+<header class="container">
+    <div class="jumbotron">
+        <!-- <h1 style="color: white;"></h1> -->
+        <form action="/query_client" method="POST">
+            <!-- <div class="form-group" id="ClientID">
+				<select name='ClientID' class="form-control custom-select">
+					<option disabled selected>Client ID</option>
+					<%if (locals.clientID) {%>
+						<%clientID.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+            </div>
+            <div class="form-group row justify-content-md-center">
+                <select class="form-control col col-md-4" name="comparsion">
+                    <option disabled selected>Choose The Range OF</option>
+                    <option value ="large">Large Than</option>
+                    <option value="less">Less Than</option>
+                </select> 
+				<input class="form-control col col-md-4" placeholder="  Budget" type="text" name="Budget">
+			</div> -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">姓名</span>
+                </div>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-lg">Search</button>
+            </div>
+        </form>
+    </div>
+</header>
+
+<div class="container" id="data">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">姓名</th>
+                <th scope="col">简历</th>
+                <!-- <th scope="col">电话</th> -->
+                <th scope="col">邮箱</th>
+                <th scope="col">工作类型</th>
+                <th scope="col">首份工作起始时间</th>
+                <th scope="col">首份工作结束时间</th>
+                <th scope="col">首份工作经历</th>
+            </tr>
+        </thead>
+        <tbody>
+                <%if (locals.File_ID) {%>
+                    <%File_ID.forEach(function(file) {%>
+                        <tr>
+                            <%for (var key in file) {%>
+                                <td>
+                                    <% if (key == 'Resume') { %>
+                                        <a href="/download/<%=file[key]%>"><%=file[key]%></a>
+                                    <%} else {%>
+                                        <%=file[key]%>
+                                    <%}%>  
+                                </td>
+                            <%}%>
+                        </tr>
+                    <%});%>
+                <%}%>
+        </tbody>
+    </table>
+</div>
+
+<% include ./partials/footer %>

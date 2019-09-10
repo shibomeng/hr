@@ -1,0 +1,166 @@
+<% include ./partials/header %>
+
+<header class="container">
+	<div class="jumbotron">
+		<h1 style="color: white;">Search Order</h1>
+          <form action="/query_order" method="POST">
+           <!-- <div class="form-group" id="OrderID">
+				<select name='OrderID' class="form-control custom-select">
+					<option value="" disabled selected>Order ID</option>
+					<%if (locals.orderID) {%>
+						<%orderID.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+            </div> -->
+			<div class="form-group" id="ClientID">
+				<select name='ClientID' class="form-control custom-select">
+					<option value="" disabled selected>Client ID</option>
+					<%if (locals.clientID) {%>
+						<%clientID.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+            </div>
+            <div class="form-group row justify-content-md-center">
+				<select class="form-control col col-md-4" name="comparsion">
+					<option disabled selected>Choose The Range OF</option>
+					<option value="large">Large Than</option>
+					<option value="less">Less Than</option>
+				</select>
+				<input class="form-control col col-md-4" placeholder="  Num of Invitees" type="text" name="invitee">
+			</div>
+			<div class="form-group row justify-content-md-center">
+				<select class="form-control col col-md-4" name="priceCompare">
+					<option disabled selected>Choose The Range OF</option>
+					<option value="large">Large Than</option>
+					<option value="less">Less Than</option>
+				</select>
+				<input class="form-control col col-md-4" placeholder="  Total Price" type="text" name="price">
+            </div>
+			<div class="form-group">
+				<select name='Event' class="form-control custom-select">
+					<option value="" disabled selected>Event</option>
+					<%if (locals.Event) {%>
+						<%Event.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+            </div>
+			<div class="form-group">
+				<select name='Venue' class="form-control custom-select">
+					<option value="" disabled selected>Venue</option>
+					<%if (locals.Venue) {%>
+						<%Venue.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+			</div>
+			<div class="form-group row" id="menu_div">
+				<select name='Menu' class="form-control custom-select col-md-4" id="Menu">
+					<option value="" disabled selected>Menu</option>
+					<%if (locals.Menu) {%>
+						<%Menu.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+				<select class="form-control col col-md-4" name="MenuComparsion">
+					<option disabled selected>Choose The Range OF</option>
+					<option value="large">Large Than</option>
+					<option value="less">Less Than</option>
+				</select>
+				<input id="MenuQuantity" class="col col-md-4" placeholder="  Menu Quantity" type="text" name="MenuQuantity">
+            </div>
+			<div class="form-group row" id="flower_div">
+				<select name='FW' class="form-control custom-select col-md-4" id="flower">
+					<option value="" disabled selected>Flower/Decor</option>
+					<%if (locals.Flower) {%>
+						<%Flower.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+				<select class="form-control col col-md-4" name="FWcomparsion">
+					<option disabled selected>Choose The Range OF</option>
+					<option value="large">Large Than</option>
+					<option value="less">Less Than</option>
+				</select>
+				<input id="FWQuantity" class="col col-md-4" placeholder="  Flower Quantity" type="text" name="FWQuantity">
+            </div>
+			<div class="form-group">
+				<select name='ME' class="form-control custom-select">
+					<option value="" disabled selected>Music/Entertainment</option>
+					<%if (locals.Music) {%>
+						<%Music.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary btn-lg">Search</button>
+			</div>
+		</form>
+	</div>
+</header>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">Order ID</th>
+			<th scope="col">Client ID</th>
+			<th scope="col">Date</th>
+			<th scope="col">Num Of Invitees</th>
+			<th scope="col">Location</th>
+			<th scope="col">Event</th>
+			<th scope="col">Total Price</th>
+			<th scope="col">Menu</th>
+			<th scope="col">Menu Quantity</th>
+			<th scope="col">Flower/Decor</th>
+			<th scope="col">Flower/Decor Quantity</th>
+			<th scope="col">Music/Entertainment</th>
+		</tr>
+	</thead>
+	<tbody>
+			<%if (locals.rows) {%>
+				<%rows.forEach(function(order) {%>
+					<tr>
+						<%for (var key in order) {%>
+							<td>
+								<%=order[key]%>
+							</td>
+						<%}%>
+						<td>
+							<form action="/delete_order/<%= order.ORDER_INFO_ID %>?_method=DELETE" method="POST">
+								<button class="btn btn-danger">Delete</button>
+							</form>
+						</td>
+					</tr>
+				<%});%>
+			<%}%>
+	</tbody>
+</table>
+
+<script type="text/javascript" src="/JS/select.js"></script>
+<script type="text/javascript" src="/JS/q_order.js"></script>
+
+<% include ./partials/footer %>

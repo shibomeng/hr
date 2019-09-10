@@ -1,0 +1,62 @@
+<% include ./partials/header %>
+
+<header class="container">
+    <div class="jumbotron">
+        <form id="form1" enctype="multipart/form-data" method="post" action="/upload-single">
+			<div class="form-group">
+				<input type="file" name="fileToUpload" id="fileToUpload" value="选择要上传的文件" required>
+			</div>
+			<div class="form-group" id="type">
+				<select name='job' class="form-control custom-select" required>
+					<option value="" disabled selected>工作方向</option>
+					<option value="程序">程序</option>
+					<option value="美术">美术</option>
+					<option value="策划">策划</option>
+				</select>
+			</div>
+			<div class="form-group input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">姓名</span>
+				</div>
+				<input type="text" name="name" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" required>
+			</div>
+			<!-- <div class="form-group input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">电话</span>
+				</div>
+				<input type="text" name="phone" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+			</div> -->
+			<div class="form-group input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">邮箱</span>
+				</div>
+				<input type="text" name="email" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+			</div>
+			<div class="form-group input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">首份工作起始时间</span>
+				</div>
+				<input type="date" name="begin" class="form-control">
+			</div>
+			<div class="form-group input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">首份工作结束时间</span>
+				</div>
+				<input type="date" name="end" class="form-control">
+			</div>
+			<div class="form-group input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">首份工作经历</span>
+				</div>
+				<input type="text" name="experience" class="form-control">
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary btn-lg">上传</button>
+			</div>
+		</form>
+    </div>
+</header>
+
+<script type="text/javascript" src="/JS/upload.js"></script>
+
+<% include ./partials/footer %>

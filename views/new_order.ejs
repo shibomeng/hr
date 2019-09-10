@@ -1,0 +1,97 @@
+<% include ./partials/header %>
+
+<header class="container">
+	<div class="jumbotron">
+		<h1 style="color: white;">New Order</h1>
+          <form action="/new_order" method="POST">
+            <div class="form-group">
+				<input placeholder="  Order ID" type="text" name="OrderID" required>
+			</div>
+			<div class="form-group">
+				<select name='ClientID' class="form-control custom-select" required>
+					<option value="" disabled selected>Client ID</option>
+					<%if (locals.clientID) {%>
+						<%clientID.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+            </div>
+            <div class="form-group">
+				<input placeholder="  Num of Invitees" type="text" name="invitee">
+            </div>
+			<div class="form-group">
+				<select name='Event' class="form-control custom-select">
+					<option value="" disabled selected>Event</option>
+					<%if (locals.Event) {%>
+						<%Event.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+            </div>
+			<div class="form-group">
+				<select name='Venue' class="form-control custom-select">
+					<option value="" disabled selected>Venue</option>
+					<%if (locals.Venue) {%>
+						<%Venue.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+			</div>
+			
+			<div class="form-group row justify-content-md-center" id="menu_div">
+				<select name='Menu' class="form-control col col-md-4" id="Menu">
+					<option value="" disabled selected>Menu</option>
+					<%if (locals.Menu) {%>
+						<%Menu.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+				<input id="MenuQuantity" class="col col-md-4" placeholder="  Menu Quantity" type="text" name="MenuQuantity">
+			</div>
+			<div class="form-group row justify-content-md-center" id="flower_div">
+				<select name='FW' class="form-control col col-md-4" id="flower">
+					<option value="" disabled selected>Flower/Decor</option>
+					<%if (locals.Flower) {%>
+						<%Flower.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+				<input id="FWQuantity" class="col col-md-4" placeholder="  Flower Quantity" type="text" name="FWQuantity">
+            </div>
+			<div class="form-group">
+				<select name='ME' class="form-control custom-select">
+					<option value="" disabled selected>Music/Entertainment</option>
+					<%if (locals.Music) {%>
+						<%Music.forEach(function(m) {%>
+							<%for (var key in m) {%>
+								<option value="<%= m[key] %>"><%= m[key] %></option>
+							<%}%>
+						<%});%>
+					<%}%>
+				</select>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary btn-lg">Insert</button>
+			</div>
+		</form>
+	</div>
+</header>
+
+<script type="text/javascript" src="/JS/select.js"></script>
+
+<% include ./partials/footer %>
